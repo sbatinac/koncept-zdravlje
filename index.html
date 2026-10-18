@@ -499,61 +499,22 @@ $('#cForm').addEventListener('submit', async e => {
 </script>
 
 <button class="music" id="music" aria-label="Pokreni glazbu"><span class="dot" id="mIco">♪</span><span class="lbl" id="mLbl">Pokreni glazbu</span><span class="eq"><i></i><i></i><i></i></span></button>
+<audio id="bgm" src="music.mp3" loop preload="none"></audio>
 <script>
-/* Mirna ambijentalna glazba – generira se u pregledniku (Web Audio), bez autorskih prava */
+/* Pozadinska glazba "Graceful Flow" – pokreće se samo na klik, s laganim pojačavanjem i utišavanjem */
 (() => {
-  let ctx, master, timer, playing = false;
-  const btn = document.getElementById('music'), ico = document.getElementById('mIco'), lbl = document.getElementById('mLbl');
-  // D-dur pentatonika + akordi (I – vi – IV – V), mekano i optimistično
-  const chords = [[146.83,220,293.66,369.99],[123.47,246.94,293.66,369.99],[98,196,246.94,293.66],[110,220,277.18,329.63]];
-  const scale = [587.33,659.25,739.99,880,987.77,1174.66];
-
-  function reverb() {
-    const len = ctx.sampleRate * 3.5, buf = ctx.createBuffer(2, len, ctx.sampleRate);
-    for (let c = 0; c < 2; c++) { const d = buf.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random()*2-1) * Math.pow(1 - i/len, 2.6); }
-    const cv = ctx.createConvolver(); cv.buffer = buf; return cv;
-  }
-  function pad(freqs, t, dur) {
-    freqs.forEach(f => [0, 4].forEach(det => {
-      const o = ctx.createOscillator(), g = ctx.createGain(), lp = ctx.createBiquadFilter();
-      o.type = 'triangle'; o.frequency.value = f; o.detune.value = det;
-      lp.type = 'lowpass'; lp.frequency.value = 900;
-      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.028, t + 2.5); g.gain.linearRampToValueAtTime(0, t + dur);
-      o.connect(lp).connect(g).connect(master); o.start(t); o.stop(t + dur + .1);
-    }));
-  }
-  function bell(f, t) {
-    const o = ctx.createOscillator(), g = ctx.createGain();
-    o.type = 'sine'; o.frequency.value = f;
-    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.07, t + .02); g.gain.exponentialRampToValueAtTime(.0001, t + 3.2);
-    o.connect(g).connect(master); o.start(t); o.stop(t + 3.3);
-  }
-  let step = 0;
-  function schedule() {
-    const t = ctx.currentTime + .1, bar = 6.4;
-    pad(chords[step % 4], t, bar + 1.5);
-    for (let i = 0; i < 4; i++) if (Math.random() < .7) bell(scale[Math.floor(Math.random()*scale.length)], t + i*1.6 + Math.random()*.4);
-    step++;
-    timer = setTimeout(schedule, bar * 1000);
-  }
-  function start() {
-    if (!ctx) {
-      ctx = new (window.AudioContext || window.webkitAudioContext)();
-      master = ctx.createGain(); master.gain.value = 0;
-      const rv = reverb(), wet = ctx.createGain(); wet.gain.value = .55;
-      master.connect(ctx.destination); master.connect(rv).connect(wet).connect(ctx.destination);
-    }
-    ctx.resume(); master.gain.cancelScheduledValues(ctx.currentTime);
-    master.gain.linearRampToValueAtTime(.9, ctx.currentTime + 2);
-    schedule(); playing = true;
-    btn.classList.add('on'); ico.textContent = '❚❚'; lbl.textContent = 'Pauza'; btn.setAttribute('aria-label','Pauziraj glazbu');
-  }
-  function stop() {
-    clearTimeout(timer); master.gain.linearRampToValueAtTime(0, ctx.currentTime + 1.2);
-    setTimeout(() => { if (!playing) ctx.suspend(); }, 1300); playing = false;
-    btn.classList.remove('on'); ico.textContent = '♪'; lbl.textContent = 'Pokreni glazbu'; btn.setAttribute('aria-label','Pokreni glazbu');
-  }
-  btn.onclick = () => playing ? stop() : start();
+  const a = document.getElementById('bgm'), btn = document.getElementById('music'),
+        ico = document.getElementById('mIco'), lbl = document.getElementById('mLbl');
+  const MAX = 0.6; let fade;
+  const ramp = (to, ms, done) => {
+    clearInterval(fade); const from = a.volume, steps = 30; let i = 0;
+    fade = setInterval(() => { i++; a.volume = Math.max(0, Math.min(1, from + (to - from) * i / steps)); if (i >= steps) { clearInterval(fade); done && done(); } }, ms / steps);
+  };
+  const ui = on => { btn.classList.toggle('on', on); ico.textContent = on ? '❚❚' : '♪'; lbl.textContent = on ? 'Pauza' : 'Pokreni glazbu'; btn.setAttribute('aria-label', on ? 'Pauziraj glazbu' : 'Pokreni glazbu'); };
+  btn.onclick = () => {
+    if (a.paused) { a.volume = 0; a.play().then(() => { ui(true); ramp(MAX, 1800); }).catch(() => {}); }
+    else { ui(false); ramp(0, 900, () => a.pause()); }
+  };
 })();
 </script>
 </body>
