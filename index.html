@@ -44,7 +44,7 @@
   .logo{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:1.3rem;text-decoration:none;display:flex;align-items:center;gap:8px}
   .logo i{width:30px;height:30px;border-radius:50%;background:var(--acc);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-size:.95rem}
   .logo span{color:var(--acc)}
-  .menu{display:flex;gap:24px;list-style:none}
+  .menu{display:flex;gap:24px;list-style:none;margin-left:auto}
   .menu a{text-decoration:none;color:var(--mut);font-weight:500}
   .menu a:hover{color:var(--acc)}
   .burger{display:none;background:none;border:0;color:var(--txt);font-size:1.6rem;cursor:pointer}
@@ -167,15 +167,18 @@
   footer{background:var(--txt);padding:30px 0;color:rgba(255,255,255,.72);font-size:.9rem;text-align:center}
 
   /* GLAZBA */
-  .music{position:fixed;right:18px;bottom:18px;z-index:90;display:flex;align-items:center;gap:10px;background:#fff;color:var(--acc);border:1px solid var(--line);border-radius:999px;padding:10px 18px 10px 12px;font:600 .95rem Inter,sans-serif;cursor:pointer;box-shadow:0 10px 30px rgba(23,48,42,.18);transition:transform .2s}
-  .music:hover{transform:translateY(-2px)}
-  .music .dot{width:34px;height:34px;border-radius:50%;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem}
+  .navr{display:flex;align-items:center;gap:10px;margin-left:22px}
+  .music{position:relative;display:flex;align-items:center;gap:10px;background:#fff;color:var(--acc);border:1px solid var(--line);border-radius:999px;padding:5px 14px 5px 5px;font:600 .88rem Inter,sans-serif;cursor:pointer;box-shadow:0 4px 14px rgba(23,48,42,.10);transition:transform .2s;white-space:nowrap}
+  .music:hover{transform:translateY(-1px)}
+  @media(min-width:1001px){.music{width:178px}}
+  .music.on .dot{font-size:.62rem;letter-spacing:-1px}
+  .music .dot{width:28px;height:28px;border-radius:50%;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem}
   .music .eq{display:none;gap:2px;align-items:flex-end;height:14px}
   .music.on .eq{display:flex}
   .music .eq i{width:3px;background:var(--acc);border-radius:2px;animation:eq 1s infinite ease-in-out}
   .music .eq i:nth-child(2){animation-delay:.2s}.music .eq i:nth-child(3){animation-delay:.4s}
   @keyframes eq{0%,100%{height:4px}50%{height:14px}}
-  @media(max-width:600px){.music .lbl{display:none}.music{padding:8px}}
+  @media(max-width:1000px){.music .lbl{display:none}.music{padding:5px}}
 
   /* PODIJELI */
   .share{background:var(--bg2);padding:60px 0;text-align:center;border-top:1px solid var(--line)}
@@ -231,9 +234,6 @@
     .sbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
     .sb{justify-content:center;padding:12px 10px}
     .sb.nt{grid-column:1/-1}
-    .music{right:12px;bottom:12px;opacity:.92}
-    .music .dot{width:30px;height:30px;font-size:.9rem}
-    footer{padding-bottom:80px}
     .nv{width:42px;height:42px;font-size:1.8rem;background:rgba(255,255,255,.18)}
     .nv.l{left:8px}.nv.r{right:8px}
     .modal iframe{height:80vh;width:96vw}
@@ -252,7 +252,7 @@
 <nav>
   <div class="wrap">
     <a href="#" class="logo"><i>✚</i>Koncept<span>Zdravlje</span></a>
-    <button class="burger" aria-label="Izbornik" onclick="document.querySelector('.menu').classList.toggle('open')">☰</button>
+
     <ul class="menu" onclick="this.classList.remove('open')">
       <li><a href="#o-meni">O meni</a></li>
       <li><a href="#suradnja">Suradnja</a></li>
@@ -261,6 +261,10 @@
       <li><a href="#dokumenti">Dokumenti</a></li>
       <li><a href="#kontakt">Kontakt</a></li>
     </ul>
+    <div class="navr">
+      <button class="music" id="music" aria-label="Pokreni glazbu"><span class="dot" id="mIco">♪</span><span class="lbl" id="mLbl">Pokreni glazbu</span><span class="eq"><i></i><i></i><i></i></span></button>
+      <button class="burger" aria-label="Izbornik" onclick="document.querySelector('.menu').classList.toggle('open')">☰</button>
+    </div>
   </div>
 </nav>
 
@@ -604,7 +608,6 @@ $('#cForm').addEventListener('submit', async e => {
 });
 </script>
 
-<button class="music" id="music" aria-label="Pokreni glazbu"><span class="dot" id="mIco">♪</span><span class="lbl" id="mLbl">Pokreni glazbu</span><span class="eq"><i></i><i></i><i></i></span></button>
 <audio id="bgm" src="music.mp3" loop preload="none"></audio>
 <script>
 /* Pozadinska glazba "Graceful Flow" – pokreće se samo na klik, s laganim pojačavanjem i utišavanjem */
