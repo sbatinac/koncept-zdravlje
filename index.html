@@ -176,6 +176,18 @@
   .music .eq i:nth-child(2){animation-delay:.2s}.music .eq i:nth-child(3){animation-delay:.4s}
   @keyframes eq{0%,100%{height:4px}50%{height:14px}}
   @media(max-width:600px){.music .lbl{display:none}.music{padding:8px}}
+
+  /* PODIJELI */
+  .share{background:var(--bg2);padding:60px 0;text-align:center;border-top:1px solid var(--line)}
+  .share h3{font-family:Fraunces,Georgia,serif;font-size:1.6rem;margin-bottom:6px}
+  .share p{color:var(--mut);margin-bottom:24px}
+  .sbtns{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+  .sb{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:999px;color:#fff;text-decoration:none;font:600 .95rem Inter,sans-serif;border:0;cursor:pointer;transition:transform .2s,filter .2s}
+  .sb:hover{transform:translateY(-2px);filter:brightness(1.08)}
+  .sb svg{width:18px;height:18px;fill:currentColor;flex:none}
+  .sb.fb{background:#1877f2}.sb.wa{background:#25d366}.sb.vb{background:#7360f2}.sb.ms{background:#0084ff}
+  .sb.tg{background:#229ed9}.sb.li{background:#0a66c2}.sb.em{background:#5a6d67}.sb.cp{background:#fff;color:var(--txt);border:1px solid var(--line)}
+  .sb.nt{background:var(--acc)}
 </style>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -321,6 +333,50 @@
     </form>
   </div>
 </section>
+
+
+<section class="share" id="podijeli">
+  <div class="wrap">
+    <h3>Podijelite s nekim kome bi ovo moglo pomoći</h3>
+    <p>Jedan klik, i Vaš prijatelj ili kolega ima sve na jednom mjestu.</p>
+    <div class="sbtns">
+      <button class="sb nt" id="shNative" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 16a3 3 0 0 0-2.4 1.2l-6.8-3.4a3 3 0 0 0 0-1.6l6.8-3.4A3 3 0 1 0 15 7l-6.8 3.4a3 3 0 1 0 0 3.2L15 17a3 3 0 1 0 3-1z"/></svg>Podijeli</button>
+      <a class="sb fb" data-s="fb" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 8h3V4h-3c-2.8 0-5 2.2-5 5v2H6v4h3v9h4v-9h3l1-4h-4V9c0-.6.4-1 1-1z"/></svg>Facebook</a>
+      <a class="sb wa" data-s="wa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1-.4-.1-1-.3-1.7-.6-3-1.3-4.9-4.3-5.1-4.5-.1-.2-1.2-1.6-1.2-3.1s.8-2.2 1.1-2.5c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.5c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.5.3.1.2.1.7-.1 1.4z"/></svg>WhatsApp</a>
+      <a class="sb vb" data-s="vb"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.4 2c-2 0-6.2.4-8 2.2C2 5.6 1.5 7.8 1.4 10.4c-.1 2.6-.2 7.5 4.5 8.8v2c0 .5.6.8 1 .4l2.1-2.3c3 .2 5.3-.3 5.6-.4 2.6-.8 6.5-1.6 7.2-7.1.7-5.7-.4-9.6-2.4-11-1.8-1.1-4.6-.9-8-.8zm4.8 13.6c-.4.4-1 .9-1.6.7-2.4-.9-4.7-2.6-6.3-5-.6-.9-1.2-1.9-1.3-2.9-.1-.6.4-1.1.8-1.5.3-.3.8-.4 1.1-.1l1.3 1.6c.2.3.2.8-.1 1.1l-.5.4c-.2.2-.2.5 0 .7.7 1.4 1.8 2.5 3.2 3.2.3.1.5 0 .7-.2l.4-.5c.3-.3.7-.4 1.1-.2l1.6 1.2c.3.3.3.8 0 1.2z"/></svg>Viber</a>
+      <a class="sb ms" data-s="ms" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.4 2 2 6.1 2 11.6c0 2.9 1.2 5.4 3.2 7.1V22l3-1.7c1.2.3 2.4.5 3.8.5 5.6 0 10-4.1 10-9.6S17.6 2 12 2zm1 12.9-2.6-2.7-5 2.7 5.5-5.8 2.6 2.7 4.9-2.7-5.4 5.8z"/></svg>Messenger</a>
+      <a class="sb tg" data-s="tg" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21.9 4.3 18.7 19.5c-.2 1-.9 1.3-1.7.8l-4.8-3.5-2.3 2.2c-.3.3-.5.5-1 .5l.3-4.9 8.9-8c.4-.3-.1-.5-.6-.2l-11 6.9L1.8 12c-1-.3-1-1 .2-1.5l18.6-7.2c.9-.3 1.6.2 1.3 1z"/></svg>Telegram</a>
+      <a class="sb li" data-s="li" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.5h4V21H3zM9.5 9.5h3.8v1.6h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.2c0-1.2 0-2.8-1.7-2.8s-2 1.3-2 2.7V21h-4z"/></svg>LinkedIn</a>
+      <a class="sb em" data-s="em"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm9 7.2L4 7v1.6l8 5 8-5V7z"/></svg>Email</a>
+      <button class="sb cp" id="shCopy"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H6a2 2 0 0 0-2 2v12h2V3h10zm3 4H10a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16h-9V7h9z"/></svg><span>Kopiraj link</span></button>
+    </div>
+  </div>
+</section>
+<script>
+(() => {
+  const url = location.origin + location.pathname;
+  const title = 'Koncept Zdravlje · Kristina Godanj Batinac, mag. pharm.';
+  const text = 'Znanje iz ljekarne. Pristup cijelom čovjeku. ' ;
+  const u = encodeURIComponent(url), t = encodeURIComponent(text + url), ti = encodeURIComponent(title);
+  const links = {
+    fb: `https://www.facebook.com/sharer/sharer.php?u=${u}`,
+    wa: `https://wa.me/?text=${t}`,
+    vb: `viber://forward?text=${t}`,
+    ms: /Android|iPhone|iPad/i.test(navigator.userAgent) ? `fb-messenger://share/?link=${u}` : `https://www.facebook.com/sharer/sharer.php?u=${u}`,
+    tg: `https://t.me/share/url?url=${u}&text=${encodeURIComponent(text)}`,
+    li: `https://www.linkedin.com/sharing/share-offsite/?url=${u}`,
+    em: `mailto:?subject=${ti}&body=${t}`
+  };
+  document.querySelectorAll('.sb[data-s]').forEach(a => a.href = links[a.dataset.s]);
+  const nat = document.getElementById('shNative');
+  if (navigator.share) { nat.hidden = false; nat.onclick = () => navigator.share({ title, text, url }).catch(() => {}); }
+  const cp = document.getElementById('shCopy');
+  cp.onclick = async () => {
+    try { await navigator.clipboard.writeText(url); } catch { const i = document.createElement('input'); i.value = url; document.body.appendChild(i); i.select(); document.execCommand('copy'); i.remove(); }
+    const l = cp.querySelector('span'); l.textContent = 'Kopirano ✓'; setTimeout(() => l.textContent = 'Kopiraj link', 2000);
+  };
+})();
+</script>
 
 <footer><div class="wrap">© <span id="yr"></span> Koncept Zdravlje · Kristina Godanj Batinac, mag. pharm.</div></footer>
 
