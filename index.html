@@ -466,7 +466,11 @@ $('#cForm').addEventListener('submit', async e => {
       body: JSON.stringify({ ...data, _subject: 'Upit s web stranice – ' + data.ime, _replyto: data.email, _template: 'table', _captcha: 'false' })
     });
     const j = await r.json();
-    if (String(j.success) !== 'true') throw 0;
+    if (String(j.success) !== 'true') {
+      console.warn('FormSubmit:', j);
+      if (/activat/i.test(j.message || '')) { st.textContent = 'Forma čeka aktivaciju – provjerite mail za aktivaciju.'; st.style.color = '#b45309'; btn.disabled = false; return; }
+      throw 0;
+    }
     st.textContent = 'Hvala! Javit ćemo se uskoro.'; st.style.color = '#16a34a'; e.target.reset();
   } catch { st.textContent = 'Greška pri slanju. Pišite nam direktno na email.'; st.style.color = '#dc2626'; }
   btn.disabled = false;
