@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Koncept Zdravlje · Kristina Godanj Batinac, mag. pharm.</title>
+<meta name="description" content="Stručna predavanja, edukacije, savjetovanje i stručni sadržaj iz farmacije, javnog ljekarništva, nutricionizma i integrativnog pristupa zdravlju.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#ffffff; --bg2:#f3f8f5; --txt:#17302a; --mut:#5a6d67;
+    --acc:#2a8c69; --acc2:#34a57d; --soft:#e2f3eb; --line:#e1ebe6; --r:18px;
+    --sh:0 8px 28px rgba(23,48,42,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth}
+  body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--txt);line-height:1.65}
+  a{color:inherit}
+  .wrap{max-width:1150px;margin:0 auto;padding:0 20px}
+  section{padding:90px 0}
+  section:nth-of-type(even){background:var(--bg2)}
+  h1,h2{font-family:Fraunces,Georgia,serif;letter-spacing:-.01em}
+  h2{font-size:clamp(1.9rem,4vw,2.7rem);font-weight:700;margin-bottom:10px;line-height:1.15}
+  .kick{display:inline-block;color:var(--acc);font-weight:600;text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;margin-bottom:10px}
+  .lead{color:var(--mut);max-width:660px;margin-bottom:42px;font-size:1.05rem}
+  .btn{display:inline-block;background:var(--acc);color:#fff;font-weight:600;padding:14px 28px;border-radius:999px;text-decoration:none;border:0;cursor:pointer;font-size:1rem;box-shadow:0 6px 18px rgba(42,140,105,.28);transition:transform .2s,background .2s}
+  .btn:hover{background:var(--acc2);transform:translateY(-2px)}
+  .btn.ghost{background:#fff;color:var(--txt);border:1px solid var(--line);box-shadow:none}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .logo{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:1.3rem;text-decoration:none;display:flex;align-items:center;gap:8px}
+  .logo i{width:30px;height:30px;border-radius:50%;background:var(--acc);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-style:normal;font-size:.95rem}
+  .logo span{color:var(--acc)}
+  .menu{display:flex;gap:24px;list-style:none}
+  .menu a{text-decoration:none;color:var(--mut);font-weight:500}
+  .menu a:hover{color:var(--acc)}
+  .burger{display:none;background:none;border:0;color:var(--txt);font-size:1.6rem;cursor:pointer}
+  @media(max-width:860px){
+    .burger{display:block}
+    .menu{display:none;position:absolute;top:66px;left:0;right:0;flex-direction:column;background:#fff;padding:20px;gap:16px;box-shadow:var(--sh)}
+    .menu.open{display:flex}
+  }
+
+  /* BANNER – zamijeni banner.jpg svojom slikom (preporuka 1920×900) */
+  .hero{min-height:80vh;display:flex;align-items:center;color:#fff;
+    background:linear-gradient(100deg,rgba(14,40,33,.62) 0%,rgba(14,40,33,.25) 55%,rgba(14,40,33,0) 100%),
+               url('banner.jpg') center/cover no-repeat,
+               linear-gradient(135deg,#1f7a5b,#2a8c69 40%,#7cc9a3 80%,#d6efb4)}
+  .hero .kick{color:#c9f2dd}
+  .hero h1{font-size:clamp(2.4rem,6vw,4.3rem);font-weight:700;line-height:1.08;max-width:780px;text-shadow:0 2px 20px rgba(0,0,0,.2)}
+  .hero h1 em{font-style:italic;color:#d9f7e7}
+  .hero p{color:rgba(255,255,255,.93);font-size:1.18rem;max-width:580px;margin:22px 0 36px}
+  .hero .btns{display:flex;gap:12px;flex-wrap:wrap}
+  .hero .btn{background:#fff;color:var(--acc);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+  .hero .btn:hover{background:var(--soft)}
+  .hero .btn.ghost{background:rgba(255,255,255,.14);color:#fff;border-color:rgba(255,255,255,.6);backdrop-filter:blur(4px)}
+  .titles{display:flex;flex-wrap:wrap;gap:8px;margin-top:34px}
+  .titles span{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);padding:6px 14px;border-radius:999px;font-size:.9rem;font-weight:500;backdrop-filter:blur(4px)}
+
+  /* O MENI */
+  .about{display:grid;grid-template-columns:1.2fr 1fr;gap:56px;align-items:center}
+  @media(max-width:860px){.about{grid-template-columns:1fr;gap:32px}}
+  .about p{color:var(--mut);margin-bottom:16px}
+  .about p strong{color:var(--txt)}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .stat{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:26px;box-shadow:var(--sh)}
+  .stat b{display:block;font-family:Fraunces,Georgia,serif;font-size:2.4rem;color:var(--acc);line-height:1.1}
+  .stat small{color:var(--mut);font-size:.92rem}
+
+  /* SURADNJA */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:30px;box-shadow:var(--sh);transition:transform .25s,border-color .25s}
+  .card:hover{transform:translateY(-4px);border-color:#bfe3d1}
+  .card .ico{font-size:1.5rem;margin-bottom:16px;width:56px;height:56px;border-radius:16px;background:var(--soft);display:flex;align-items:center;justify-content:center}
+  .card h3{font-size:1.15rem;margin-bottom:8px;line-height:1.3}
+  .card p{color:var(--mut);font-size:.97rem}
+  .card .for{margin-top:16px;font-size:.85rem;font-weight:600;color:var(--acc)}
+
+  /* VRIJEDNOSTI */
+  .vals{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-top:10px}
+  .val{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px}
+  .val b{flex:none;width:34px;height:34px;border-radius:50%;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.95rem}
+  .val div{font-weight:600}
+  .val small{display:block;font-weight:400;color:var(--mut)}
+
+  /* CTA TRAKA */
+  .cta{background:linear-gradient(120deg,#1f7a5b,#2a8c69 55%,#46b086);color:#fff;border-radius:24px;padding:46px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:56px}
+  .cta h3{font-family:Fraunces,Georgia,serif;font-size:1.7rem;line-height:1.2;max-width:560px}
+  .cta p{color:rgba(255,255,255,.88);margin-top:6px}
+  .cta .btn{background:#fff;color:var(--acc)}
+
+  /* TABOVI ALBUMA */
+  .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+  .tab{background:#fff;border:1px solid var(--line);color:var(--mut);padding:8px 16px;border-radius:999px;cursor:pointer;font-weight:600;font-family:inherit}
+  .tab.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+
+  /* GALERIJA */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .ph{aspect-ratio:1;border-radius:14px;overflow:hidden;cursor:pointer;background:var(--bg2);position:relative;box-shadow:var(--sh)}
+  .ph img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+  .ph:hover img{transform:scale(1.06)}
+  .more{text-align:center;margin-top:26px}
+
+  /* PDF */
+  .pdfs{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px}
+  .pdf{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .2s;box-shadow:var(--sh)}
+  .pdf:hover{border-color:var(--acc)}
+  .pdf .th{aspect-ratio:3/4;background:#fff center/cover no-repeat;position:relative;border-bottom:1px solid var(--line)}
+  .pdf .th::after{content:"PDF";position:absolute;top:10px;right:10px;background:var(--acc);color:#fff;font-size:.7rem;font-weight:800;padding:3px 7px;border-radius:5px}
+  .pdf .nm{padding:12px 14px;font-weight:600;font-size:.95rem}
+
+  /* VIDEO */
+  .vids{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+  .vid{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;cursor:pointer;transition:border-color .2s;box-shadow:var(--sh)}
+  .vid:hover{border-color:var(--acc)}
+  .vid .th{aspect-ratio:16/9;background:#0e2821 center/cover no-repeat;position:relative}
+  .vid .th::after{content:"▶";position:absolute;inset:0;margin:auto;width:60px;height:60px;border-radius:50%;background:rgba(42,140,105,.92);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.4rem;padding-left:4px}
+  .vid .nm{padding:12px 14px;font-weight:600}
+  #mVidEl{width:min(1100px,94vw);height:auto;aspect-ratio:16/9;max-height:86vh;background:#000}
+
+  .msg{color:var(--mut);padding:30px 0}
+  .skel{background:linear-gradient(90deg,#e8f1ec,#f6faf8,#e8f1ec);background-size:200%;animation:sk 1.2s infinite}
+  @keyframes sk{to{background-position:-200% 0}}
+
+  /* MODAL */
+  .modal{position:fixed;inset:0;background:rgba(8,20,16,.92);z-index:100;display:none;align-items:center;justify-content:center}
+  .modal.open{display:flex}
+  .modal img{max-width:92vw;max-height:86vh;border-radius:8px}
+  .modal iframe{width:min(1000px,94vw);height:88vh;border:0;border-radius:8px;background:#fff}
+  .mx{position:absolute;top:14px;right:20px;font-size:2rem;background:none;border:0;color:#fff;cursor:pointer}
+  .nv{position:absolute;top:50%;transform:translateY(-50%);font-size:2.4rem;background:rgba(255,255,255,.1);border:0;color:#fff;width:54px;height:54px;border-radius:50%;cursor:pointer}
+  .nv.l{left:16px}.nv.r{right:16px}
+  .cap{position:absolute;bottom:16px;left:0;right:0;text-align:center;color:#ccc;font-size:.9rem}
+  .dl{position:absolute;top:18px;left:20px;color:#fff;font-weight:600}
+
+  /* KONTAKT */
+  .kontakt{display:grid;grid-template-columns:1fr 1.3fr;gap:48px}
+  @media(max-width:860px){.kontakt{grid-template-columns:1fr}}
+  .info .row{display:flex;gap:14px;align-items:center;margin-bottom:18px}
+  .info .row i{flex:none;width:46px;height:46px;border-radius:14px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:1.2rem}
+  .info small{display:block;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;font-size:.72rem}
+  .info a{text-decoration:none;font-weight:600;font-size:1.08rem}
+  .sig{margin-top:28px;padding-top:22px;border-top:1px solid var(--line)}
+  .sig b{font-family:Fraunces,Georgia,serif;font-size:1.2rem}
+  .sig small{display:block;color:var(--mut);margin-top:2px}
+  form{display:grid;gap:12px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px;box-shadow:var(--sh)}
+  input,textarea{width:100%;background:#fbfdfc;border:1px solid var(--line);color:var(--txt);padding:14px;border-radius:12px;font:inherit}
+  input:focus,textarea:focus{outline:none;border-color:var(--acc);background:#fff}
+  textarea{min-height:140px;resize:vertical}
+  .hp{position:absolute;left:-9999px}
+  #fstat{font-weight:600}
+
+  footer{background:var(--txt);padding:30px 0;color:rgba(255,255,255,.72);font-size:.9rem;text-align:center}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a href="#" class="logo"><i>✚</i>Koncept<span>Zdravlje</span></a>
+    <button class="burger" aria-label="Izbornik" onclick="document.querySelector('.menu').classList.toggle('open')">☰</button>
+    <ul class="menu" onclick="this.classList.remove('open')">
+      <li><a href="#o-meni">O meni</a></li>
+      <li><a href="#suradnja">Suradnja</a></li>
+      <li><a href="#galerija">Galerija</a></li>
+      <li><a href="#video">Video</a></li>
+      <li><a href="#dokumenti">Dokumenti</a></li>
+      <li><a href="#kontakt">Kontakt</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="kick">Kristina Godanj Batinac, mag. pharm.</div>
+    <h1>Znanje iz ljekarne. <em>Pristup cijelom čovjeku.</em></h1>
+    <p>Predavanja, edukacije i stručni sadržaj koji povezuju farmakoterapiju, nutricionizam, prevenciju i integrativni pristup zdravlju.</p>
+    <div class="btns">
+      <a href="#kontakt" class="btn">Predložite suradnju</a>
+      <a href="#suradnja" class="btn ghost">Što nudim</a>
+    </div>
+    <div class="titles">
+      <span>Magistra farmacije</span><span>Pharmacy Manager</span><span>Specijalist nutricionizma</span><span>Dipl. homeopat</span>
+    </div>
+  </div>
+</header>
+
+<section id="o-meni">
+  <div class="wrap about">
+    <div>
+      <div class="kick">O meni</div>
+      <h2>Više od dvadeset godina uz pacijente</h2>
+      <p>Po struci sam <strong>magistra farmacije</strong>, s dodatnim kompetencijama specijalista nutricionizma, diplomiranog homeopata i Pharmacy Managera.</p>
+      <p>Iskustvo iz javnog ljekarništva spajam s tim znanjima u <strong>cjelovit pristup zdravlju</strong>: od klasične farmakoterapije do prehrane, prevencije i komplementarnih metoda.</p>
+      <p>Zanima me uzrok tegobe, ne samo simptom. Zato svakom pacijentu pristupam individualno, uz odgovorno sagledavanje postojeće terapije i zdravstvenog stanja.</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>20+</b><small>godina u javnom ljekarništvu</small></div>
+      <div class="stat"><b>4</b><small>stručna područja u jednom pristupu</small></div>
+      <div class="stat"><b>Tim</b><small>iskustvo vođenja ljekarničkog tima</small></div>
+      <div class="stat"><b>1:1</b><small>individualizirani pristup pacijentu</small></div>
+    </div>
+  </div>
+</section>
+
+<section id="suradnja">
+  <div class="wrap">
+    <div class="kick">Ponuda suradnje</div>
+    <h2>Kako mogu pomoći Vašem timu</h2>
+    <p class="lead">Dostupna sam kao vanjski stručni suradnik za ustanove, tvrtke, udruge i medije.</p>
+    <div class="cards">
+      <div class="card"><div class="ico">🎤</div><h3>Predavanja, edukacije i radionice</h3><p>Javno ljekarništvo, nutricionizam, prevencija, farmakoterapija i integrativni pristup, uz prikaze slučajeva iz prakse.</p><div class="for">Ljekarnici · liječnici · zdravstveni djelatnici · javnost</div></div>
+      <div class="card"><div class="ico">✍️</div><h3>Stručni članci, tekstovi i blogovi</h3><p>Kvalitetan i razumljiv sadržaj koji povezuje farmaceutsku praksu, prehranu, prevenciju i komplementarne pristupe.</p><div class="for">Portali · časopisi · brendovi · ljekarne</div></div>
+      <div class="card"><div class="ico">🔍</div><h3>Prikaz i analiza slučajeva</h3><p>Stvarne situacije i izazovi u terapiji i radu s pacijentima, s naglaskom na praktična rješenja i bolju ljekarničku skrb.</p><div class="for">Stručni skupovi · interne edukacije</div></div>
+      <div class="card"><div class="ico">🧩</div><h3>Savjetovanje i edukativni programi</h3><p>Priprema materijala, prezentacija, stručnih projekata i edukacijskih programa za zdravstvene djelatnike ili krajnje korisnike.</p><div class="for">Tvrtke · ustanove · udruge</div></div>
+    </div>
+
+    <div class="vals">
+      <div class="val"><b>✓</b><div>Stručnost<small>provjereno znanje i praksa</small></div></div>
+      <div class="val"><b>✓</b><div>Odgovornost<small>prema pacijentu i naručitelju</small></div></div>
+      <div class="val"><b>✓</b><div>Komunikacija<small>jasno, razumljivo, kvalitetno</small></div></div>
+      <div class="val"><b>✓</b><div>Rokovi<small>dogovoreno je dogovoreno</small></div></div>
+    </div>
+
+    <div class="cta">
+      <div>
+        <h3>Prepoznajete prostor za suradnju?</h3>
+        <p>Rado ću predstaviti moguća područja i modele zajedničkog rada.</p>
+      </div>
+      <a href="#kontakt" class="btn">Javite se</a>
+    </div>
+  </div>
+</section>
+
+<section id="galerija">
+  <div class="wrap">
+    <div class="kick">Galerija</div>
+    <h2>S predavanja i radionica</h2>
+    <p class="lead">Trenuci s edukacija, stručnih skupova i događanja.</p>
+    <div class="tabs" id="gTabs"></div>
+    <div class="grid" id="gGrid"></div>
+    <div class="more"><button class="btn ghost" id="gMore" hidden>Prikaži još</button></div>
+  </div>
+</section>
+
+<section id="video">
+  <div class="wrap">
+    <div class="kick">Video</div>
+    <h2>Pogledajte i poslušajte</h2>
+    <p class="lead">Snimke predavanja, gostovanja i edukativnih sadržaja.</p>
+    <div class="tabs" id="vTabs"></div>
+    <div class="vids" id="vGrid"></div>
+  </div>
+</section>
+
+<section id="dokumenti">
+  <div class="wrap">
+    <div class="kick">Dokumenti</div>
+    <h2>Životopis i materijali</h2>
+    <p class="lead">Životopis, stručni članci i prezentacije za pregled i preuzimanje.</p>
+    <div class="tabs" id="pTabs"></div>
+    <div class="pdfs" id="pGrid"></div>
+  </div>
+</section>
+
+<section id="kontakt">
+  <div class="wrap kontakt">
+    <div class="info">
+      <div class="kick">Kontakt</div>
+      <h2>Razgovarajmo o suradnji</h2>
+      <p class="lead">Pošaljite upit ili nazovite, odgovaram brzo.</p>
+      <div class="row"><i>📞</i><div><small>Telefon</small><a href="tel:+385919339549">091 933 9549</a></div></div>
+      <div class="row"><i>✉️</i><div><small>Email</small><a href="mailto:kristina505@gmail.com">kristina505@gmail.com</a></div></div>
+      <div class="sig">
+        <b>Kristina Godanj Batinac, mag. pharm.</b>
+        <small>Pharmacy Manager · Specijalist nutricionizma · Dipl. homeopat</small>
+      </div>
+    </div>
+    <form id="cForm">
+      <input name="ime" placeholder="Ime i prezime / ustanova *" required>
+      <input name="email" type="email" placeholder="Email *" required>
+      <input name="telefon" placeholder="Telefon">
+      <textarea name="poruka" placeholder="Opišite ukratko ideju suradnje *" required></textarea>
+      <input name="website" class="hp" tabindex="-1" autocomplete="off">
+      <button class="btn" type="submit">Pošalji upit</button>
+      <div id="fstat"></div>
+    </form>
+  </div>
+</section>
+
+<footer><div class="wrap">© <span id="yr"></span> Koncept Zdravlje · Kristina Godanj Batinac, mag. pharm.</div></footer>
+
+<!-- MODALI -->
+<div class="modal" id="mImg">
+  <button class="mx" onclick="closeM('mImg')">×</button>
+  <button class="nv l" onclick="step(-1)">‹</button>
+  <img id="mImgEl" alt="">
+  <button class="nv r" onclick="step(1)">›</button>
+  <div class="cap" id="mCap"></div>
+</div>
+<div class="modal" id="mVid">
+  <button class="mx" onclick="closeM('mVid')">×</button>
+  <iframe id="mVidEl" allow="autoplay; fullscreen" allowfullscreen></iframe>
+</div>
+<div class="modal" id="mPdf">
+  <a class="dl" id="mPdfDl" target="_blank" rel="noopener">⬇ Preuzmi</a>
+  <button class="mx" onclick="closeM('mPdf')">×</button>
+  <iframe id="mPdfEl" allow="autoplay"></iframe>
+</div>
+
+<script>
+/* ====== POSTAVKE ====== */
+const DRIVE_KEY = 'UPISI_GOOGLE_API_KLJUC';           // Google Cloud → Drive API → API key
+const FOLDERS = {
+  gallery: '1LWHLzzruF1U2HDTEt4dumdHwAdu_07u1',
+  video:   '1pTxkmbM9DoRKidFxSoC5VnSpjJOtm-P9',
+  pdf:     '118cK2gbMiuW9we9F8EaOpCGj93Git5-p'
+};
+const FORM_EMAIL = 'kristina505@gmail.com';          // FormSubmit (nakon aktivacije može se zamijeniti tajnim kodom)
+const PAGE = 24; // slika po učitavanju
+
+const thumb = (id, w) => `https://drive.google.com/thumbnail?id=${id}&sz=w${w}`;
+const $ = s => document.querySelector(s);
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+const FOLDER_MIME = 'application/vnd.google-apps.folder';
+const MATCH = {
+  gallery: m => m.startsWith('image/'),
+  video:   m => m.startsWith('video/'),
+  pdf:     m => m === 'application/pdf'
+};
+
+// Svi elementi jedne mape (s paginacijom)
+async function listChildren(folderId) {
+  let out = [], token = '';
+  do {
+    const q = encodeURIComponent(`'${folderId}' in parents and trashed = false`);
+    const url = `https://www.googleapis.com/drive/v3/files?q=${q}&key=${DRIVE_KEY}` +
+      `&fields=nextPageToken,files(id,name,mimeType,createdTime)&pageSize=1000&orderBy=createdTime desc` +
+      (token ? `&pageToken=${token}` : '');
+    const r = await fetch(url);
+    if (!r.ok) throw new Error('Drive API ' + r.status);
+    const j = await r.json();
+    out = out.concat(j.files || []);
+    token = j.nextPageToken || '';
+  } while (token);
+  return out;
+}
+
+// Root mapa = "Ostalo", svaka podmapa = album
+async function load(type) {
+  const ok = MATCH[type];
+  const strip = f => ({ id: f.id, name: f.name.replace(/\.[^.]+$/, ''), date: Date.parse(f.createdTime) });
+  const items = await listChildren(FOLDERS[type]);
+  const albums = [];
+  const rootFiles = items.filter(f => ok(f.mimeType)).map(strip);
+  if (rootFiles.length) albums.push({ name: 'Ostalo', files: rootFiles });
+  const subs = items.filter(f => f.mimeType === FOLDER_MIME);
+  const subAlbums = await Promise.all(subs.map(async s => ({
+    name: s.name,
+    files: (await listChildren(s.id)).filter(f => ok(f.mimeType)).map(strip)
+  })));
+  albums.push(...subAlbums.filter(a => a.files.length));
+  return albums.sort((a, b) => a.name.localeCompare(b.name, 'hr'));
+}
+
+function tabs(el, albums, onPick) {
+  if (albums.length < 2) { el.innerHTML = ''; onPick(albums.flatMap(a => a.files)); return; }
+  const all = { name: 'Sve', files: albums.flatMap(a => a.files).sort((a,b)=>b.date-a.date) };
+  const list = [all, ...albums];
+  el.innerHTML = list.map((a,i) => `<button class="tab${i?'':' on'}" data-i="${i}">${a.name} <small>(${a.files.length})</small></button>`).join('');
+  el.onclick = e => {
+    const b = e.target.closest('.tab'); if (!b) return;
+    el.querySelectorAll('.tab').forEach(t => t.classList.remove('on')); b.classList.add('on');
+    onPick(list[b.dataset.i].files);
+  };
+  onPick(all.files);
+}
+
+/* ---------- GALERIJA ---------- */
+let gFiles = [], gShown = 0, cur = 0;
+function gRender(files) { gFiles = files; gShown = 0; $('#gGrid').innerHTML = ''; gMore(); }
+function gMore() {
+  const next = gFiles.slice(gShown, gShown + PAGE);
+  $('#gGrid').insertAdjacentHTML('beforeend', next.map((f, k) =>
+    `<div class="ph skel" onclick="openImg(${gShown + k})"><img loading="lazy" src="${thumb(f.id, 600)}" alt="${f.name}" onload="this.parentNode.classList.remove('skel')"></div>`).join(''));
+  gShown += next.length;
+  $('#gMore').hidden = gShown >= gFiles.length;
+}
+$('#gMore').onclick = gMore;
+function openImg(i) { cur = i; showImg(); $('#mImg').classList.add('open'); }
+function showImg() { const f = gFiles[cur]; $('#mImgEl').src = thumb(f.id, 1920); $('#mCap').textContent = `${f.name} · ${cur+1}/${gFiles.length}`; }
+function step(d) { cur = (cur + d + gFiles.length) % gFiles.length; showImg(); }
+
+/* ---------- PDF ---------- */
+function pRender(files) {
+  $('#pGrid').innerHTML = files.map(f =>
+    `<div class="pdf" onclick="openPdf('${f.id}')"><div class="th" style="background-image:url('${thumb(f.id, 400)}')"></div><div class="nm">${f.name}</div></div>`).join('');
+}
+function openPdf(id) {
+  $('#mPdfEl').src = `https://drive.google.com/file/d/${id}/preview`;
+  $('#mPdfDl').href = `https://drive.google.com/uc?export=download&id=${id}`;
+  $('#mPdf').classList.add('open');
+}
+
+/* ---------- VIDEO ---------- */
+function vRender(files) {
+  $('#vGrid').innerHTML = files.map(f =>
+    `<div class="vid" onclick="openVid('${f.id}')"><div class="th" style="background-image:url('${thumb(f.id, 640)}')"></div><div class="nm">${f.name}</div></div>`).join('');
+}
+function openVid(id) {
+  $('#mVidEl').src = `https://drive.google.com/file/d/${id}/preview`;
+  $('#mVid').classList.add('open');
+}
+
+/* ---------- MODAL ---------- */
+function closeM(id) {
+  $('#'+id).classList.remove('open');
+  if (id==='mPdf') $('#mPdfEl').src='about:blank';
+  if (id==='mVid') $('#mVidEl').src='about:blank'; // zaustavi video
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeM('mImg'); closeM('mPdf'); closeM('mVid'); }
+  if ($('#mImg').classList.contains('open')) { if (e.key==='ArrowLeft') step(-1); if (e.key==='ArrowRight') step(1); }
+});
+document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) closeM(m.id); }));
+// swipe na mobitelu
+let tx = 0;
+$('#mImg').addEventListener('touchstart', e => tx = e.touches[0].clientX);
+$('#mImg').addEventListener('touchend', e => { const d = e.changedTouches[0].clientX - tx; if (Math.abs(d) > 50) step(d < 0 ? 1 : -1); });
+
+/* ---------- INIT ---------- */
+['gGrid','pGrid','vGrid'].forEach(id => $('#'+id).innerHTML = '<div class="msg">Učitavanje…</div>');
+load('video').then(a => a.length ? tabs($('#vTabs'), a, vRender) : $('#video').hidden = true) // nema videa = sekcija se skriva
+  .catch(() => $('#vGrid').innerHTML = '<div class="msg">Video se nije mogao učitati.</div>');
+load('gallery').then(a => a.length ? tabs($('#gTabs'), a, gRender) : $('#gGrid').innerHTML = '<div class="msg">Galerija je trenutno prazna.</div>')
+  .catch(() => $('#gGrid').innerHTML = '<div class="msg">Galerija se nije mogla učitati.</div>');
+load('pdf').then(a => a.length ? tabs($('#pTabs'), a, pRender) : $('#pGrid').innerHTML = '<div class="msg">Nema dokumenata.</div>')
+  .catch(() => $('#pGrid').innerHTML = '<div class="msg">Dokumenti se nisu mogli učitati.</div>');
+
+/* ---------- KONTAKT ---------- */
+$('#cForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const st = $('#fstat'), btn = e.target.querySelector('button');
+  const data = Object.fromEntries(new FormData(e.target));
+  btn.disabled = true; st.textContent = 'Šaljem…'; st.style.color = '';
+  try {
+    if (data.website) throw 0; // honeypot
+    delete data.website;
+    const r = await fetch(`https://formsubmit.co/ajax/${FORM_EMAIL}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ ...data, _subject: 'Upit s web stranice – ' + data.ime, _replyto: data.email, _template: 'table', _captcha: 'false' })
+    });
+    const j = await r.json();
+    if (String(j.success) !== 'true') throw 0;
+    st.textContent = 'Hvala! Javit ćemo se uskoro.'; st.style.color = '#16a34a'; e.target.reset();
+  } catch { st.textContent = 'Greška pri slanju. Pišite nam direktno na email.'; st.style.color = '#dc2626'; }
+  btn.disabled = false;
+});
+</script>
+</body>
+</html>
