@@ -165,6 +165,17 @@
   #fstat{font-weight:600}
 
   footer{background:var(--txt);padding:30px 0;color:rgba(255,255,255,.72);font-size:.9rem;text-align:center}
+
+  /* GLAZBA */
+  .music{position:fixed;right:18px;bottom:18px;z-index:90;display:flex;align-items:center;gap:10px;background:#fff;color:var(--acc);border:1px solid var(--line);border-radius:999px;padding:10px 18px 10px 12px;font:600 .95rem Inter,sans-serif;cursor:pointer;box-shadow:0 10px 30px rgba(23,48,42,.18);transition:transform .2s}
+  .music:hover{transform:translateY(-2px)}
+  .music .dot{width:34px;height:34px;border-radius:50%;background:var(--acc);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem}
+  .music .eq{display:none;gap:2px;align-items:flex-end;height:14px}
+  .music.on .eq{display:flex}
+  .music .eq i{width:3px;background:var(--acc);border-radius:2px;animation:eq 1s infinite ease-in-out}
+  .music .eq i:nth-child(2){animation-delay:.2s}.music .eq i:nth-child(3){animation-delay:.4s}
+  @keyframes eq{0%,100%{height:4px}50%{height:14px}}
+  @media(max-width:600px){.music .lbl{display:none}.music{padding:8px}}
 </style>
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -485,6 +496,65 @@ $('#cForm').addEventListener('submit', async e => {
   } catch { st.textContent = 'Greška pri slanju. Pišite nam direktno na email.'; st.style.color = '#dc2626'; }
   btn.disabled = false;
 });
+</script>
+
+<button class="music" id="music" aria-label="Pokreni glazbu"><span class="dot" id="mIco">♪</span><span class="lbl" id="mLbl">Pokreni glazbu</span><span class="eq"><i></i><i></i><i></i></span></button>
+<script>
+/* Mirna ambijentalna glazba – generira se u pregledniku (Web Audio), bez autorskih prava */
+(() => {
+  let ctx, master, timer, playing = false;
+  const btn = document.getElementById('music'), ico = document.getElementById('mIco'), lbl = document.getElementById('mLbl');
+  // D-dur pentatonika + akordi (I – vi – IV – V), mekano i optimistično
+  const chords = [[146.83,220,293.66,369.99],[123.47,246.94,293.66,369.99],[98,196,246.94,293.66],[110,220,277.18,329.63]];
+  const scale = [587.33,659.25,739.99,880,987.77,1174.66];
+
+  function reverb() {
+    const len = ctx.sampleRate * 3.5, buf = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (let c = 0; c < 2; c++) { const d = buf.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random()*2-1) * Math.pow(1 - i/len, 2.6); }
+    const cv = ctx.createConvolver(); cv.buffer = buf; return cv;
+  }
+  function pad(freqs, t, dur) {
+    freqs.forEach(f => [0, 4].forEach(det => {
+      const o = ctx.createOscillator(), g = ctx.createGain(), lp = ctx.createBiquadFilter();
+      o.type = 'triangle'; o.frequency.value = f; o.detune.value = det;
+      lp.type = 'lowpass'; lp.frequency.value = 900;
+      g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.028, t + 2.5); g.gain.linearRampToValueAtTime(0, t + dur);
+      o.connect(lp).connect(g).connect(master); o.start(t); o.stop(t + dur + .1);
+    }));
+  }
+  function bell(f, t) {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'sine'; o.frequency.value = f;
+    g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(.07, t + .02); g.gain.exponentialRampToValueAtTime(.0001, t + 3.2);
+    o.connect(g).connect(master); o.start(t); o.stop(t + 3.3);
+  }
+  let step = 0;
+  function schedule() {
+    const t = ctx.currentTime + .1, bar = 6.4;
+    pad(chords[step % 4], t, bar + 1.5);
+    for (let i = 0; i < 4; i++) if (Math.random() < .7) bell(scale[Math.floor(Math.random()*scale.length)], t + i*1.6 + Math.random()*.4);
+    step++;
+    timer = setTimeout(schedule, bar * 1000);
+  }
+  function start() {
+    if (!ctx) {
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      master = ctx.createGain(); master.gain.value = 0;
+      const rv = reverb(), wet = ctx.createGain(); wet.gain.value = .55;
+      master.connect(ctx.destination); master.connect(rv).connect(wet).connect(ctx.destination);
+    }
+    ctx.resume(); master.gain.cancelScheduledValues(ctx.currentTime);
+    master.gain.linearRampToValueAtTime(.9, ctx.currentTime + 2);
+    schedule(); playing = true;
+    btn.classList.add('on'); ico.textContent = '❚❚'; lbl.textContent = 'Pauza'; btn.setAttribute('aria-label','Pauziraj glazbu');
+  }
+  function stop() {
+    clearTimeout(timer); master.gain.linearRampToValueAtTime(0, ctx.currentTime + 1.2);
+    setTimeout(() => { if (!playing) ctx.suspend(); }, 1300); playing = false;
+    btn.classList.remove('on'); ico.textContent = '♪'; lbl.textContent = 'Pokreni glazbu'; btn.setAttribute('aria-label','Pokreni glazbu');
+  }
+  btn.onclick = () => playing ? stop() : start();
+})();
 </script>
 </body>
 </html>
