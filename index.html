@@ -54,10 +54,11 @@
     .menu.open{display:flex}
   }
 
+  .banner{display:block;width:100%;background:#f3f8f5}
+  .banner img{display:block;width:100%;height:auto;max-height:78vh;object-fit:cover;object-position:center}
   /* BANNER – zamijeni banner.jpg svojom slikom (preporuka 1920×900) */
-  .hero{min-height:80vh;display:flex;align-items:center;color:#fff;
+  .hero{min-height:auto;padding:80px 0;display:flex;align-items:center;color:#fff;
     background:linear-gradient(100deg,rgba(14,40,33,.62) 0%,rgba(14,40,33,.25) 55%,rgba(14,40,33,0) 100%),
-               url('banner.jpg') center/cover no-repeat,
                linear-gradient(135deg,#1f7a5b,#2a8c69 40%,#7cc9a3 80%,#d6efb4)}
   .hero .kick{color:#c9f2dd}
   .hero h1{font-size:clamp(2.4rem,6vw,4.3rem);font-weight:700;line-height:1.08;max-width:780px;text-shadow:0 2px 20px rgba(0,0,0,.2)}
@@ -182,6 +183,8 @@
     </ul>
   </div>
 </nav>
+
+<div class="banner"><img src="banner.jpg" width="1916" height="821" alt="Koncept Zdravlje – zdravlje, preventiva, farmacija, nutricionizam, homeopatija"></div>
 
 <header class="hero">
   <div class="wrap">
